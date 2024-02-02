@@ -2,9 +2,22 @@ pipeline {
     agent any
 
     stages {
-        stage('Hello') {
+        stage('Cleanup Workspace') {
             steps {
-                echo 'Hello World'
+                cleanWs()
+            }
+        }
+        stage('Checkout from SCM') {
+            steps {
+                checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'Github-token', url: 'https://github.com/Anmewzaa/React-pipeline-master']])
+            }
+        }
+        stage('SonarQube Analysis') {
+            steps {
+                def scannerHome = tool 'SonarScanner';
+                withSonarQubeEnv() {
+                  sh "${scannerHome}/bin/sonar-scanner"
+                }
             }
         }
     }
