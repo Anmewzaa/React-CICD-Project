@@ -12,17 +12,16 @@ pipeline {
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'Github-token', url: 'https://github.com/Anmewzaa/React-pipeline-master']])
             }
         }
-        stage('SonarQube analysis') {
-        environment {
-            scannerHome = tool 'SonarQube_2.8'
-        }
-        steps {
-            withSonarQubeEnv('sonar-scanner') {
-                sh '''
-                ${scannerHome}/bin/sonar-scanner \
-                -D sonar.sources=.project/src \
-                '''
-            }
+        stage('SonarQube Analysis') {
+          withSonarQubeEnv() {
+            sh ("""
+              sonar-scanner \
+              -Dsonar.projectKey=React-pipeline \
+              -Dsonar.sources=. \
+              -Dsonar.host.url=http://35.213.160.121:9000 \
+              -Dsonar.login=sqp_ada09d879bc0eda078dcc9396f4b8ce94386b2c2
+            """)
+          }
         }
     }
     }
