@@ -25,10 +25,12 @@ pipeline {
             withSonarQubeEnv("${SONARSERVER}") {
             sh ("""
               ${scannerHome}/bin/sonar-scanner \
-              -Dsonar.projectKey=React-pipeline \
-              -Dsonar.sources=project/src/ \
-              -Dsonar.host.url=http://35.213.160.121:9000 \
-              -Dsonar.login=sqp_ada09d879bc0eda078dcc9396f4b8ce94386b2c2 -X
+                -D sonar.projectKey=React-pipeline \
+                -D sonar.projectName=React-pipeline \
+                -D sonar.projectVersion=1.0.0 \
+                -D sonar.sources=./project/src \
+                -D sonar.test.inclusions=/ \
+                -D sonar.exclusions=/
             """)
             }
           }
