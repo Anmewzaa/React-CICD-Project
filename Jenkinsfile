@@ -23,14 +23,13 @@ pipeline {
           }
           steps {
             withSonarQubeEnv("${SONARSERVER}") {
-              sh "${scannerHome}/bin/sonar-scanner"
-            // sh ("""
-            //   sonar-scanner \
-            //   -Dsonar.projectKey=React-pipeline \
-            //   -Dsonar.sources=. \
-            //   -Dsonar.host.url=http://35.213.160.121:9000 \
-            //   -Dsonar.login=sqp_ada09d879bc0eda078dcc9396f4b8ce94386b2c2
-            // """)
+            sh ("""
+              ${scannerHome}/bin/sonar-scanner \
+              -Dsonar.projectKey=React-pipeline \
+              -Dsonar.sources=. \
+              -Dsonar.host.url=http://35.213.160.121:9000 \
+              -Dsonar.login=sqp_ada09d879bc0eda078dcc9396f4b8ce94386b2c2
+            """)
             }
           }
         }
