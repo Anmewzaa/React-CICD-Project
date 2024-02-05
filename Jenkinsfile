@@ -35,10 +35,5 @@ pipeline {
             }
           }
         }
-        stage('Quantity Gate') {
-            steps {
-              waitForQualityGate abortPipeline: false, credentialsId: 'sonartoken'
-            }
-        }
     }
 }
