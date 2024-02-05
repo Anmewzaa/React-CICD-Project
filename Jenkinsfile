@@ -51,6 +51,7 @@ pipeline {
         stage('Trigger Kubernetes pipeline') {
             steps {
                 sh('''
+                    pwd
                     echo "${BUILD_NUMBER}" > build-num.txt
                     cat build-num.txt
                 ''')
@@ -61,7 +62,7 @@ pipeline {
 
     post {
         always {
-            archiveArtifacts artifacts: 'build-number.txt', followSymlinks: false
+            archiveArtifacts artifacts: '*/build-number.txt', followSymlinks: false
         }
     }
 }
