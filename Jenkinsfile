@@ -55,8 +55,13 @@ pipeline {
                     cat build-num.txt
                 ''')
                 build job: "Kubernetes", wait: true
-                archiveArtifacts artifacts: 'build-number.txt', followSymlinks: false
             }
+        }
+    }
+
+    post {
+        always {
+            archiveArtifacts artifacts: 'build-number.txt', followSymlinks: false
         }
     }
 }
