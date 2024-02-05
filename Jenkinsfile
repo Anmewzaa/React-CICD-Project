@@ -48,16 +48,5 @@ pipeline {
                 }
             }
         }
-        stage('Trigger Kubernetes pipeline') {
-            steps {
-                sh('''
-                    pwd
-                    echo "${BUILD_NUMBER}" > build-num.txt
-                    cat build-num.txt
-                ''')
-                archiveArtifacts artifacts: '/var/lib/jenkins/workspace/React-pipeline/build-number.txt', followSymlinks: false
-                build job: "Kubernetes", wait: true
-            }
-        }
     }
 }
