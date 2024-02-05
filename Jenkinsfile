@@ -51,7 +51,7 @@ pipeline {
         stage('Trigger Kubernetes pipeline') {
             steps {
                 sh('''
-                    pwd
+                    echo "${BUILD_NUMBER}" > build-num.txt
                 ''')
                 build job: "Kubernetes", wait: true
             }
