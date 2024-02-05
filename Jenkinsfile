@@ -50,6 +50,9 @@ pipeline {
         }
         stage('Trigger Kubernetes pipeline') {
             steps {
+                sh('''
+                    pwd
+                ''')
                 build job: "Kubernetes", wait: true
             }
         }
