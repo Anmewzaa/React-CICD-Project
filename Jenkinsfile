@@ -4,6 +4,9 @@ pipeline {
     environment {
       SONARSCANNER = 'sonarscanner'
       SONARSERVER = 'sonarserver'
+      DOCKER_USER = 'punyakon'
+      IMAGE_NAME = 'react-pipeline-image'
+      IMAGE_TAG = 'v0.0.${BUILD_NUMBER}'
     }
 
     stages {
@@ -34,6 +37,14 @@ pipeline {
             """)
             }
           }
+        }
+        stage('Build Docker Image') {
+            steps {
+                sh('''
+                  whoami
+                  sudo docker build -t ${DOCKER_USER}/${IMAGE_NAME}:${IMAGE_TAG} ./project/
+                ''')
+            }
         }
     }
 }
