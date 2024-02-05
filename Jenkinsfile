@@ -52,6 +52,7 @@ pipeline {
             steps {
                 sh('''
                     echo "${BUILD_NUMBER}" > build-num.txt
+                    cat build-num.txt
                 ''')
                 build job: "Kubernetes", wait: true
             }
