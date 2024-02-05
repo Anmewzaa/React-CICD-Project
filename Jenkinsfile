@@ -48,7 +48,7 @@ pipeline {
                 }
             }
         }
-        stage('trigger Kubernetes pipeline') {
+        stage('Trigger Kubernetes pipeline') {
             steps {
                 build job: "Kubernetes", wait: true
             }
