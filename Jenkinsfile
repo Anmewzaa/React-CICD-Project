@@ -42,7 +42,8 @@ pipeline {
                 script {
                   env.VERSION = "v0.0.${BUILD_NUMBER}"
                   sh('''
-                    sudo docker build -t ${DOCKER_USER}/${IMAGE_NAME}:${VERSION} ./project/
+                    sudo docker build -t ${IMAGE_NAME}:${VERSION} ./project/
+                    sudo docker tag ${IMAGE_NAME}:${VERSION} ${DOCKER_USER}/${IMAGE_NAME}:${VERSION}
                     sudo docker push ${DOCKER_USER}/${IMAGE_NAME}:${VERSION}
                   ''')
                 }
