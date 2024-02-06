@@ -48,6 +48,13 @@ pipeline {
                 }
             }
         }
+        stage('Trivy image scan') {
+          steps {
+            sh('''
+              trivy image punyakon/react-pipeline-image:${BUILD_NUMBER}
+            ''')
+          }
+        }
         stage("Deploy to Kubernetes") {
             steps {
               sh('''
