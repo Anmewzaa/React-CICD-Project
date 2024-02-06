@@ -51,7 +51,7 @@ pipeline {
         stage('Trivy image scan') {
           steps {
             sh('''
-              trivy image punyakon/react-pipeline-image:${BUILD_NUMBER}
+              sudo trivy image punyakon/react-pipeline-image:v0.0.${BUILD_NUMBER}
             ''')
           }
         }
