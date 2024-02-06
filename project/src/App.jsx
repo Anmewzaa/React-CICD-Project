@@ -4,7 +4,7 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 
 function App() {
-  const [name, setName] = useState("Hello! my name is ...");
+  const [name, setName] = useState("Hello! \n My name is ...");
   const handleClick = () => {
     setName("Punyakon Patchkaew");
   };
