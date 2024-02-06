@@ -75,7 +75,9 @@ pipeline {
 
     post {
       success {
-        sh "curl https://notify-api.line.me/api/notify -H "Authorization: Bearer hrjB2otbixPDDbKlxwUhxtTUHfF4rPPameqQq5nLB9q" -F "message=["สวัสดีจ้า"]""
+        sh('''
+          curl https://notify-api.line.me/api/notify -H "Authorization: Bearer hrjB2otbixPDDbKlxwUhxtTUHfF4rPPameqQq5nLB9q" -F "message=["สวัสดีจ้า"]"
+        ''')
       }
     }
 }
