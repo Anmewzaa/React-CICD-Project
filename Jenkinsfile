@@ -58,7 +58,7 @@ pipeline {
         stage('Clean up Docker Image') {
           steps {
             sh('''
-              docker rmi ${DOCKER_USER}/${IMAGE_NAME}:${VERSION}
+              sudo docker rmi ${DOCKER_USER}/${IMAGE_NAME}:${VERSION}
             ''')
           }
         }
