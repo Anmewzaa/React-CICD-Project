@@ -48,10 +48,17 @@ pipeline {
                 }
             }
         }
-        stage('Trivy image scan') {
+        stage('Trivy Image scan') {
           steps {
             sh('''
               sudo trivy image punyakon/react-pipeline-image:v0.0.${BUILD_NUMBER}
+            ''')
+          }
+        }
+        stage('Clean up Docker Image') {
+          steps {
+            sh('''
+              docker rmi ${DOCKER_USER}/${IMAGE_NAME}:${VERSION}
             ''')
           }
         }
