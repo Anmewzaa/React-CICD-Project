@@ -69,7 +69,7 @@ pipeline {
         }
         stage('Trigger Manifest Update') {
           steps {
-            build job:'Manifestfile',parameters:[string(name:'DOCKERTAG',value: env.BUILD_NUMBER)]
+            build job:'Manifestfile',parameters: [string(name:'DOCKERTAG',value: "v0.0.${BUILD_NUMBER}")]
           }
         }
         // stage("Deploy to Kubernetes") {
