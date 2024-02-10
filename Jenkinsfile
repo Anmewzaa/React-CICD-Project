@@ -19,6 +19,11 @@ pipeline {
                 checkout scmGit(branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[credentialsId: 'Github-token', url: 'https://github.com/Anmewzaa/React-CICD-Project']])
             }
         }
+        stage('OWASP Dependency Check') {
+            steps {
+                dependencyCheck additionalArguments: '''--scan project --format HTML''', odcInstallation: 'OWASP-DP-CHECK'
+            }
+        }
         stage('SonarQube Analysis') {
           environment {
             scannerHome = tool "${SONARSCANNER}"
