@@ -67,14 +67,14 @@ pipeline {
             ''')
           }
         }
-        stage("Deploy to Kubernetes") {
-            steps {
-              sh('''
-                  cat k8s/deployment.yaml | envsubst | sudo kubectl apply -f -
-                  sudo kubectl apply -f k8s/service.yaml
-                  echo "Deploy Version:${VERSION}"
-              ''')
-            }
-        }
+        // stage("Deploy to Kubernetes") {
+        //     steps {
+        //       sh('''
+        //           cat k8s/deployment.yaml | envsubst | sudo kubectl apply -f -
+        //           sudo kubectl apply -f k8s/service.yaml
+        //           echo "Deploy Version:${VERSION}"
+        //       ''')
+        //     }
+        // }
     }
 }
