@@ -24,24 +24,24 @@ pipeline {
                 dependencyCheck additionalArguments: '''--scan project --format HTML''', odcInstallation: 'OWASP-Dependency-Check'
             }
         }
-        // stage('SonarQube Analysis') {
-        //   environment {
-        //     scannerHome = tool "${SONARSCANNER}"
-        //   }
-        //   steps {
-        //     withSonarQubeEnv("${SONARSERVER}") {
-        //     sh ("""
-        //       ${scannerHome}/bin/sonar-scanner \
-        //         -D sonar.projectKey=React-pipeline \
-        //         -D sonar.projectName=React-pipeline \
-        //         -D sonar.projectVersion=1.0.0 \
-        //         -D sonar.sources=./project/src \
-        //         -D sonar.test.inclusions=/ \
-        //         -D sonar.exclusions=/
-        //     """)
-        //     }
-        //   }
-        // }
+        stage('SonarQube Analysis') {
+          environment {
+            scannerHome = tool "${SONARSCANNER}"
+          }
+          steps {
+            withSonarQubeEnv("${SONARSERVER}") {
+            sh ("""
+              ${scannerHome}/bin/sonar-scanner \
+                -D sonar.projectKey=React-pipeline \
+                -D sonar.projectName=React-pipeline \
+                -D sonar.projectVersion=1.0.0 \
+                -D sonar.sources=./project/src \
+                -D sonar.test.inclusions=/ \
+                -D sonar.exclusions=/
+            """)
+            }
+          }
+        }
         // stage('Build and Push Docker Image') {
         //     steps {
         //         script {
