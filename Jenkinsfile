@@ -54,13 +54,13 @@ pipeline {
                 }
             }
         }
-        // stage('Trivy Image scan') {
-        //   steps {
-        //     sh('''
-        //       sudo trivy image punyakon/react-pipeline-image:v0.0.${BUILD_NUMBER}
-        //     ''')
-        //   }
-        // }
+        stage('Trivy Image scan') {
+          steps {
+            sh('''
+              sudo trivy image punyakon/react-pipeline-image:v0.0.${BUILD_NUMBER}
+            ''')
+          }
+        }
         // stage('Clean up Docker Image') {
         //   steps {
         //     sh('''
