@@ -61,13 +61,13 @@ pipeline {
             ''')
           }
         }
-        // stage('Clean up Docker Image') {
-        //   steps {
-        //     sh('''
-        //       sudo docker rmi ${DOCKER_USER}/${IMAGE_NAME}:${VERSION}
-        //     ''')
-        //   }
-        // }
+        stage('Clean up Docker Image') {
+          steps {
+            sh('''
+              sudo docker rmi ${DOCKER_USER}/${IMAGE_NAME}:${VERSION}
+            ''')
+          }
+        }
         // stage('Trigger Manifest Update') {
         //   steps {
         //     build job:'Manifestfile',parameters: [string(name:'DOCKERTAG',value: "v0.0.${BUILD_NUMBER}")]
