@@ -42,17 +42,17 @@ pipeline {
             }
           }
         }
-        // stage('Build and Push Docker Image') {
-        //     steps {
-        //         script {
-        //           env.VERSION = "v0.0.${BUILD_NUMBER}"
-        //           sh('''
-        //             sudo docker build -t ${DOCKER_USER}/${IMAGE_NAME}:${VERSION} ./project/
-        //             sudo docker push ${DOCKER_USER}/${IMAGE_NAME}:${VERSION}
-        //           ''')
-        //         }
-        //     }
-        // }
+        stage('Build and Push Docker Image') {
+            steps {
+                script {
+                  env.VERSION = "v0.0.${BUILD_NUMBER}"
+                  sh('''
+                    sudo docker build -t ${DOCKER_USER}/${IMAGE_NAME}:${VERSION} ./project/
+                    sudo docker push ${DOCKER_USER}/${IMAGE_NAME}:${VERSION}
+                  ''')
+                }
+            }
+        }
         // stage('Trivy Image scan') {
         //   steps {
         //     sh('''
