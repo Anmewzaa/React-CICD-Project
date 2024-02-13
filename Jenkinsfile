@@ -68,11 +68,11 @@ pipeline {
             ''')
           }
         }
-        // stage('Trigger Manifest Update') {
-        //   steps {
-        //     build job:'Manifestfile',parameters: [string(name:'DOCKERTAG',value: "v0.0.${BUILD_NUMBER}")]
-        //   }
-        // }
+        stage('Trigger Manifest Update') {
+          steps {
+            build job:'Manifestfile',parameters: [string(name:'DOCKERTAG',value: "v0.0.${BUILD_NUMBER}")]
+          }
+        }
         // stage("Deploy to Kubernetes") {
         //     steps {
         //       sh('''
