@@ -10,8 +10,9 @@ function App() {
   };
   return (
     <>
-      <h1>{name}</h1>
-      <button onClick={handleClick}>Click me!</button>
+      <h1>Hello</h1>
+      <h2>{name}</h2>
+      <button onClick={handleClick}>Click me !</button>
     </>
   );
 }
