@@ -6,7 +6,7 @@ import "./App.css";
 function App() {
   const [name, setName] = useState("Hello! \n My name is ...");
   const handleClick = () => {
-    setName("Punyakon Patchkaew");
+    setName("Anmewza");
   };
   return (
     <>
