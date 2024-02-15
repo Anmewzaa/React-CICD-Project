@@ -73,14 +73,5 @@ pipeline {
             build job:'Manifestfile',parameters: [string(name:'DOCKERTAG',value: "v0.0.${BUILD_NUMBER}")]
           }
         }
-        // stage("Deploy to Kubernetes") {
-        //     steps {
-        //       sh('''
-        //           cat k8s/deployment.yaml | envsubst | sudo kubectl apply -f -
-        //           sudo kubectl apply -f k8s/service.yaml
-        //           echo "Deploy Version:${VERSION}"
-        //       ''')
-        //     }
-        // }
     }
 }
