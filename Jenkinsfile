@@ -49,8 +49,8 @@ pipeline {
                   env.VERSION = "v0.1.${BUILD_NUMBER}"
                   sh('''
                     whoami
-                    sudo docker build -t ${HOST_NAME}/${PROJECT_ID}:${VERSION} ./project/
-                    sudo docker push ${HOST_NAME}/${PROJECT_ID}:${VERSION}
+                    sudo docker build -t ${HOST_NAME}/${PROJECT_ID}/${IMAGE_NAME}:${VERSION} ./project/
+                    sudo docker push ${HOST_NAME}/${PROJECT_ID}/${IMAGE_NAME}:${VERSION}
                   ''')
                 }
             }
@@ -58,14 +58,14 @@ pipeline {
         stage('Trivy Image scan') {
           steps {
             sh('''
-              sudo trivy image ${HOST_NAME}/${PROJECT_ID}:${VERSION}
+              sudo trivy image ${HOST_NAME}/${PROJECT_ID}/${IMAGE_NAME}:${VERSION}
             ''')
           }
         }
         stage('Clean up Docker Image') {
           steps {
             sh('''
-              sudo docker rmi ${HOST_NAME}/${PROJECT_ID}:${VERSION}
+              sudo docker rmi ${HOST_NAME}/${PROJECT_ID}/${IMAGE_NAME}:${VERSION}
             ''')
           }
         }
