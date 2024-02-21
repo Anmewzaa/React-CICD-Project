@@ -4,8 +4,9 @@ pipeline {
     environment {
       SONARSCANNER = 'sonarscanner'
       SONARSERVER = 'sonarserver'
-      DOCKER_USER = 'punyakon'
-      IMAGE_NAME = 'react-pipeline-image'
+      HOST_NAME = 'asia.gcr.io'
+      PROJECT_ID = 'project-punyakon'
+      IMAGE_NAME = 'react-image'
     }
 
     stages {
@@ -45,11 +46,11 @@ pipeline {
         stage('Build and Push Docker Image') {
             steps {
                 script {
-                  env.VERSION = "v0.0.${BUILD_NUMBER}"
+                  env.VERSION = "v0.1.${BUILD_NUMBER}"
                   sh('''
                     whoami
-                    sudo docker build -t ${DOCKER_USER}/${IMAGE_NAME}:${VERSION} ./project/
-                    sudo docker push ${DOCKER_USER}/${IMAGE_NAME}:${VERSION}
+                    sudo docker build -t ${HOST_NAME}/${PROJECT_ID}:${VERSION} ./project/
+                    sudo docker push ${HOST_NAME}/${PROJECT_ID}:${VERSION}
                   ''')
                 }
             }
@@ -57,20 +58,20 @@ pipeline {
         stage('Trivy Image scan') {
           steps {
             sh('''
-              sudo trivy image punyakon/react-pipeline-image:v0.0.${BUILD_NUMBER}
+              sudo trivy image ${HOST_NAME}/${PROJECT_ID}:${VERSION}
             ''')
           }
         }
         stage('Clean up Docker Image') {
           steps {
             sh('''
-              sudo docker rmi ${DOCKER_USER}/${IMAGE_NAME}:${VERSION}
+              sudo docker rmi ${HOST_NAME}/${PROJECT_ID}:${VERSION}
             ''')
           }
         }
         stage('Trigger Manifest Update') {
           steps {
-            build job:'Manifestfile',parameters: [string(name:'DOCKERTAG',value: "v0.0.${BUILD_NUMBER}")]
+            build job:'Manifestfile',parameters: [string(name:'DOCKERTAG',value: "v0.1.${BUILD_NUMBER}")]
           }
         }
     }
